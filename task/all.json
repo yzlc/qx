@@ -1,0 +1,8 @@
+{
+    "name": "yzlc",
+    "description": "yzlc",
+    "task": [   
+  	        "0 7,10,13,15,19 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuCoupon.js, tag=朴朴神券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true",
+  	        "30 8 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuPorkCoupon.js, tag=朴朴猪肉券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true"
+		]
+}
