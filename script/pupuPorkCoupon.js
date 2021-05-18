@@ -41,7 +41,9 @@ const lk = new ToolKit(`朴朴猪肉券`, `PuPuCheckIn`, {"httpApia": "ffff@192.
 const pupuTokenKey = 'lkPuPuTokenKey'
 const pupuToken = !lk.getVal(pupuTokenKey) ? '' : lk.getVal(pupuTokenKey)
 
-const storeId = 'f827bb89-be08-4466-91a9-74db55210c8c'
+const type = '0'
+const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'
+const discount_group_id = '6f2c0b28-fa39-4210-bcef-d98f22eba30e'
 
 if(!lk.isExecComm) {
     if (lk.isRequest()) {
@@ -81,7 +83,12 @@ async function all() {
         lk.execFail()
         lk.appendNotifyInfo(`⚠️请先打开朴朴获取token`)
     } else {
-        await entity()
+        let coupons = await getCoupon()
+        for (let i in coupons) {
+            let coupon = coupons[i];
+            lk.appendNotifyInfo(`满${coupon.condition_amount/100}减${coupon.discount_amount/100}`)
+            await entity(coupon)
+        }
     }
     lk.msg(``)
     lk.done()
@@ -90,14 +97,14 @@ async function all() {
 function getCoupon() {
     return new Promise((resolve, reject) => {
         let url = {
-            url: 'https://j1.pupuapi.com/client/marketing/coupon?type=1&store_id=' + storeId,
+            url: 'https://j1.pupuapi.com/client/marketing/coupon?type=' + type + '&store_id=' + store_id + '&discount_group_id=' + discount_group_id,
             headers: {
                 Authorization: pupuToken,
                 "User-Agent": lk.userAgent
             }
         }
         lk.get(url, (error, response, data) => {
-            lk.log(data)
+            //lk.log(data)
             try {
                 if (error) {
                     lk.execFail()
@@ -106,7 +113,7 @@ function getCoupon() {
                     data = JSON.parse(data)
                     if (data.errcode == 0) {
                         data = data.data
-                        let coupons = data['items']
+                        let coupons = data
                         if (Array.isArray(coupons) && coupons.length > 0) {
                             coupons.sort(function(a, b){return a.discount_amount - b.discount_amount})
                             resolve(coupons)
@@ -128,7 +135,7 @@ function getCoupon() {
     })
 }
 
-function entity() {
+function entity(coupon) {
     return new Promise((resolve, reject) => {
         let url = {
             url: 'https://j1.pupuapi.com/client/marketing/coupon/entity',
@@ -137,10 +144,10 @@ function entity() {
                 "User-Agent": lk.userAgent,
                 'Content-Type': 'application/json'
             },
-            body : JSON.stringify({"discount":"6f2c0b28-fa39-4210-bcef-d98f22eba30e","discount_group":"6f2c0b28-fa39-4210-bcef-d98f22eba30e","store_id":storeId})
+            body : JSON.stringify({"discount":coupon.discount_id,"discount_group":discount_group_id,"store_id":store_id})
         }
         lk.post(url, (error, response, data) => {
-            lk.log(data)
+            //lk.log(data)
             try {
                 if (error) {
                     lk.execFail()
