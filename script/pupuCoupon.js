@@ -42,7 +42,8 @@ const pupuTokenKey = 'lkPuPuTokenKey'
 const pupuToken = !lk.getVal(pupuTokenKey) ? '' : lk.getVal(pupuTokenKey)
 
 const type = '1'
-const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'
+const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'//地区
+const amount = 30//券使用条件（金额）
 
 if(!lk.isExecComm) {
     if (lk.isRequest()) {
@@ -85,8 +86,13 @@ async function all() {
         let coupons = await getCoupon()
         for (let i in coupons) {
             let coupon = coupons[i];
-            lk.appendNotifyInfo(`满${coupon.condition_amount/100}减${coupon.discount_amount/100}`)
-            await entity(coupon)
+            let ca = coupon.condition_amount/100
+            lk.appendNotifyInfo(`满${ca}减${coupon.discount_amount/100}`)
+            if(ca > amount) {
+                lk.appendNotifyInfo(`不满足${amount}元使用条件，跳过`)
+            } else {
+                await entity(coupon)
+            }
         }
     }
     lk.msg(``)
