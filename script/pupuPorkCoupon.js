@@ -43,7 +43,7 @@ const pupuToken = !lk.getVal(pupuTokenKey) ? '' : lk.getVal(pupuTokenKey)
 
 const type = '0'
 const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'
-const discount_group_id = '6f2c0b28-fa39-4210-bcef-d98f22eba30e'
+const discount_group_id = 'e650df04-e52f-401d-943f-492f6e194c97'
 
 if(!lk.isExecComm) {
     if (lk.isRequest()) {
