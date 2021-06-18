@@ -115,7 +115,6 @@ function getCoupon() {
                         data = data.data
                         let coupons = data
                         if (Array.isArray(coupons) && coupons.length > 0) {
-                            coupons.sort(function(a, b){return a.discount_amount - b.discount_amount})
                             resolve(coupons)
                         }
                     } else {
@@ -129,7 +128,7 @@ function getCoupon() {
                 lk.execFail()
                 lk.appendNotifyInfo(`❌错误，请带上日志联系作者，或稍后再试`)
             } finally {
-                
+                resolve()
             }
         })
     })
