@@ -44,6 +44,7 @@ const pupuToken = !lk.getVal(pupuTokenKey) ? '' : lk.getVal(pupuTokenKey)
 const type = '0'
 const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'
 const discount_group_id = 'e650df04-e52f-401d-943f-492f6e194c97'
+const discount_id = '5a1c3e83-d8d5-47fe-a1e6-19f70542dd87'
 
 if(!lk.isExecComm) {
     if (lk.isRequest()) {
@@ -83,70 +84,25 @@ async function all() {
         lk.execFail()
         lk.appendNotifyInfo(`⚠️请先打开朴朴获取token`)
     } else {
-        let coupons = await getCoupon()
-        for (let i in coupons) {
-            let coupon = coupons[i];
-            lk.appendNotifyInfo(`满${coupon.condition_amount/100}减${coupon.discount_amount/100}`)
-            await entity(coupon)
-        }
+        await entity()
     }
     lk.msg(``)
     lk.done()
 }
 
-function getCoupon() {
+function entity() {
     return new Promise((resolve, reject) => {
         let url = {
-            url: 'https://j1.pupuapi.com/client/marketing/coupon?type=' + type + '&store_id=' + store_id + '&discount_group_id=' + discount_group_id,
-            headers: {
-                Authorization: pupuToken,
-                "User-Agent": lk.userAgent
-            }
-        }
-        lk.get(url, (error, response, data) => {
-            //lk.log(data)
-            try {
-                if (error) {
-                    lk.execFail()
-                    lk.appendNotifyInfo(`❌失败`)
-                } else {
-                    data = JSON.parse(data)
-                    if (data.errcode == 0) {
-                        data = data.data
-                        let coupons = data
-                        if (Array.isArray(coupons) && coupons.length > 0) {
-                            resolve(coupons)
-                        }
-                    } else {
-                        lk.execFail()
-                        lk.appendNotifyInfo(data.errmsg)
-                    }
-                }
-            } catch (e) {
-                lk.logErr(e)
-                lk.log(`朴朴返回数据：${data}`)
-                lk.execFail()
-                lk.appendNotifyInfo(`❌错误，请带上日志联系作者，或稍后再试`)
-            } finally {
-                resolve()
-            }
-        })
-    })
-}
-
-function entity(coupon) {
-    return new Promise((resolve, reject) => {
-        let url = {
-            url: 'https://j1.pupuapi.com/client/marketing/coupon/entity',
+            url: 'https://j1.pupuapi.com/client/coupon/entity',
             headers: {
                 Authorization: pupuToken,
                 "User-Agent": lk.userAgent,
                 'Content-Type': 'application/json'
             },
-            body : JSON.stringify({"discount":coupon.discount_id,"discount_group":discount_group_id,"store_id":store_id})
+            body : JSON.stringify({"discount":discount_id,"discount_group":discount_group_id,"store_id":store_id})
         }
         lk.post(url, (error, response, data) => {
-            //lk.log(data)
+            lk.log(data)
             try {
                 if (error) {
                     lk.execFail()

@@ -142,7 +142,7 @@ function getCoupon() {
 function entity(coupon) {
     return new Promise((resolve, reject) => {
         let url = {
-            url: 'https://j1.pupuapi.com/client/marketing/coupon/entity',
+            url: 'https://j1.pupuapi.com/client/coupon/entity',
             headers: {
                 Authorization: pupuToken,
                 "User-Agent": lk.userAgent,
@@ -151,7 +151,7 @@ function entity(coupon) {
             body : JSON.stringify({"discount":coupon.discount_id,"discount_group":coupon.discount_group_id,"store_id":store_id})
         }
         lk.post(url, (error, response, data) => {
-            //lk.log(data)
+            lk.log(data)
             try {
                 if (error) {
                     lk.execFail()
