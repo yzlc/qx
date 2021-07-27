@@ -43,7 +43,7 @@ const pupuToken = !lk.getVal(pupuTokenKey) ? '' : lk.getVal(pupuTokenKey)
 
 const type = '1'
 const store_id = 'f827bb89-be08-4466-91a9-74db55210c8c'//地区
-const amount = 30//券使用条件（金额）
+const amount = 999//券使用条件（金额）
 
 if(!lk.isExecComm) {
     if (lk.isRequest()) {
