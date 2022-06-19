@@ -2,10 +2,11 @@
     "name": "yzlc",
     "description": "yzlc",
     "task": [   
-  	        "0 7,9,13,15,19 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuCoupon.js, tag=朴朴神券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true",
-  	        "30 8 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuPorkCoupon.js, tag=朴朴猪肉券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true",
-            "0 10,14,18,20 1-8 6 * https://raw.githubusercontent.com/yzlc/qx/master/script/jdPhoneBill.js, tag=京东话费, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png, enabled=true",
-"21 3,8 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true",
-"20 0,22 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true"
-		]
+	"0 7,9,13,15,19 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuCoupon.js, tag=朴朴神券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true",
+	"30 8 * * * https://raw.githubusercontent.com/yzlc/qx/master/script/pupuPorkCoupon.js, tag=朴朴猪肉券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/pupu.png, enabled=true",
+	"0 10,14,18,20 1-8 6 * https://raw.githubusercontent.com/yzlc/qx/master/script/jdPhoneBill.js, tag=京东话费, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png, enabled=true",
+	"5 0 * * * https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js, tag=京东价格保护, img-url=https://raw.githubusercontent.com/ZCY01/img/master/pricev1.png, enabled=true",
+	"21 3,8 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true",
+	"20 0,22 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true"
+    ]
 }
